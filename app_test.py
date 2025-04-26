@@ -475,6 +475,16 @@ def verify_token(authorization: str = Header(...)):
 
 
 
+@app.get(
+    '/health',
+    summary = 'ヘルスチェック',
+    description = 'AWS AppRunner からのヘルスチェック応答'
+)
+def health_check():
+    return {"status": "ok"}
+
+
+
 @app.post(
     '/documents/search',
     summary = 'ドキュメント検索',
