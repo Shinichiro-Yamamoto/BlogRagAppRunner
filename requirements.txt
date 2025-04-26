@@ -1,0 +1,13 @@
+faiss-cpu
+langchain
+openai
+langchain-community
+langchain-openai
+
+beautifulsoup4
+lxml
+
+fastapi
+uvicorn
+python-dotenv
+pydantic

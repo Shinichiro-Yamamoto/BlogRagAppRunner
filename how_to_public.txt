@@ -1,0 +1,11 @@
+
+
+
+【FAISS DB の作成】
+
+01) 「html_files」ディレクトリに、記事ファイル（html）を格納。
+02) 「html_multi_rag_test.py」を実行。（python html_multi_rag_test.py）
+
+
+
+
