@@ -476,7 +476,7 @@ def verify_token(authorization: str = Header(...)):
 
 
 @app.get(
-    '/health',
+    '/',
     summary = 'ヘルスチェック',
     description = 'AWS AppRunner からのヘルスチェック応答'
 )
