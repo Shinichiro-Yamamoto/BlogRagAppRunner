@@ -1,3 +1,4 @@
+urllib3<2
 langchain
 openai
 langchain-community
