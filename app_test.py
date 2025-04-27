@@ -17,7 +17,7 @@ from langchain.schema.retriever import BaseRetriever
 from langchain_openai import ChatOpenAI
 from langchain_community.vectorstores import FAISS
 from openai import OpenAI
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional, Tuple, List
 
 
