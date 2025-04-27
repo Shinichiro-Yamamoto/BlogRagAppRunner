@@ -4,6 +4,7 @@ faiss-gpu
 langchain
 openai
 langchain-community
+langchain-huggingface
 langchain-openai
 
 sentence-transformers

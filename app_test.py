@@ -10,7 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from langchain.chains import RetrievalQA, LLMChain
 from langchain.chains.combine_documents.map_reduce import MapReduceDocumentsChain
 from langchain.chains.combine_documents.stuff import StuffDocumentsChain
-from langchain.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.prompts import PromptTemplate
 from langchain.schema import Document
 from langchain.schema.retriever import BaseRetriever
