@@ -1,6 +1,6 @@
 urllib3<2
 
-faiss-gpu
+faiss-cpu
 langchain
 openai
 langchain-community
