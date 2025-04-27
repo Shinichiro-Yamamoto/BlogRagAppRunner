@@ -4,6 +4,7 @@ openai
 langchain-community
 langchain-openai
 
+sentence-transformers
 beautifulsoup4
 lxml
 
