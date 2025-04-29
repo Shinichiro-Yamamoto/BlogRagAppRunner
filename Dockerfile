@@ -1,26 +1,47 @@
-# ベースイメージ
+# ─────────────────────────────────────────────
+#  Base image
+#  slim を使い、サイズを抑えつつビルドに必要なツールを追加
+# ─────────────────────────────────────────────
 FROM python:3.11-slim
 
-# 必要なOSパッケージをインストール
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    gcc \
-    rustc \
-    cargo \
-    && rm -rf /var/lib/apt/lists/*
+# ─────────────────────────────────────────────
+#  OS-level build dependencies
+#  tokenizers が Rust を要求するため rustc/cargo, build-essential を追加
+# ─────────────────────────────────────────────
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        gcc \
+        rustc \
+        cargo && \
+    rm -rf /var/lib/apt/lists/*
 
-# 作業ディレクトリ作成
+# ─────────────────────────────────────────────
+#  Workdir
+# ─────────────────────────────────────────────
 WORKDIR /app
 
-# 必要ファイルをコピー
+# ─────────────────────────────────────────────
+#  Copy source code & requirements
+# ─────────────────────────────────────────────
+COPY requirements.txt .
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# ソースツリーと FAISS インデックスなどを全部コピー
 COPY . .
 
-# Pythonライブラリインストール
-RUN pip install --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+# ─────────────────────────────────────────────
+#  Hugging Face Spaces は 8080 番を探しに来る
+# ─────────────────────────────────────────────
+EXPOSE 8080
 
-# ポート開放
-EXPOSE 8000
+# ─────────────────────────────────────────────
+#  Health-checkエンドポイントがあると緑ランプが早い
+# ─────────────────────────────────────────────
+HEALTHCHECK CMD curl -f http://localhost:8080/health || exit 1
 
-# アプリ起動
-CMD ["uvicorn", "app_test:app", "--host", "0.0.0.0", "--port", "8000"]
+# ─────────────────────────────────────────────
+#  Start command  (Spaces は ENTRYPOINT/CMD をそのまま実行)
+# ─────────────────────────────────────────────
+CMD ["uvicorn", "app_test:app", "--host", "0.0.0.0", "--port", "8080"]
